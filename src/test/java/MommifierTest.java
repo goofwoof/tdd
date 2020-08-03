@@ -36,4 +36,19 @@ public class MommifierTest {
         String expect = "lilil";
         assertEquals(expect, result);
     }
+
+    @Test
+    void should_return_error_when_insert_given_error_input(){
+        //Given
+        String testStr = null;
+        //When
+        try {
+            new Mommifier().insertMommy(testStr);
+        } catch (Exception e) {
+            //Then
+            assertEquals("input is wrong", e.getMessage());
+            return;
+        }
+        fail("expected for GrammarException of The vertex args is lack.");
+    }
 }

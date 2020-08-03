@@ -3,17 +3,10 @@ import java.util.Arrays;
 public class Mommifier {
     private static final char[]  vowels = {'a', 'e', 'i', 'o', 'u'};
     private static final String MOMMY = "mommy";
-    /*public String[] insert(String[] testStr) {
-        String[] result = new String[0];
-        return Arrays.stream(testStr)
-                .map(string->insertMommy(string))
-                .collect(Collectors.toList())
-                .toArray(result);
-    }*/
 
     public String insertMommy(String string) {
-        if(string.isEmpty()) {
-            return string;
+        if(string == null || string.isEmpty()) {
+            throw new RuntimeException("input is wrong");
         }
         String[] splitResult = string.split("");
         double count = (double) Arrays.stream(splitResult).filter(onechar ->isVowel(onechar.charAt(0))).count();
@@ -22,10 +15,8 @@ public class Mommifier {
         }
         StringBuilder stringBuffer = new StringBuilder();
         Arrays.stream(splitResult).forEach(onechar->{
-            if (isVowel(onechar.charAt(0))) {
-                if (stringBuffer.length() > 0 && isVowel(stringBuffer.charAt(stringBuffer.length()-1))) {
-                    stringBuffer.append(MOMMY);
-                }
+            if (isVowel(onechar.charAt(0)) && stringBuffer.length() > 0 && isVowel(stringBuffer.charAt(stringBuffer.length()-1))) {
+                stringBuffer.append(MOMMY);
             }
             stringBuffer.append(onechar);
         });
